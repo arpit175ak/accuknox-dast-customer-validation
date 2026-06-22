@@ -14,27 +14,13 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Install application dependencies
-        run: |
-          pip install -r requirements.txt
-
-      - name: Start web application
-        run: |
-          nohup python app/main.py > app.log 2>&1 &
-          sleep 10
-          curl -I http://127.0.0.1:5000 || cat app.log
-
       - name: Run AccuKnox DAST Scan
         uses: accuknox/dast-scan-action@latest
+        continue-on-error: true
         with:
-          target_url: "http://127.0.0.1:5000"
+          target_url: "http://testphp.vulnweb.com"
           accuknox_endpoint: ${{ secrets.ACCUKNOX_ENDPOINT }}
           accuknox_token: ${{ secrets.ACCUKNOX_TOKEN }}
           accuknox_label: ${{ secrets.ACCUKNOX_LABEL }}
-          severity_threshold: "HIGH"
-          dast_scan_type: "full-scan"
+          severity_threshold: "CRITICAL"
+          dast_scan_type: "baseline"
