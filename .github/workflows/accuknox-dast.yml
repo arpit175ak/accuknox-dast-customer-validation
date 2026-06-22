@@ -22,5 +22,5 @@ jobs:
           accuknox_endpoint: ${{ secrets.ACCUKNOX_ENDPOINT }}
           accuknox_token: ${{ secrets.ACCUKNOX_TOKEN }}
           accuknox_label: ${{ secrets.ACCUKNOX_LABEL }}
-          severity_threshold: "CRITICAL"
+          severity_threshold: "HIGH"
           dast_scan_type: "baseline"
