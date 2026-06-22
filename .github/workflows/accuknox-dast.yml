@@ -11,16 +11,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout source code
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Run AccuKnox DAST Scan
         uses: accuknox/dast-scan-action@latest
-        continue-on-error: true
         with:
           target_url: "http://testphp.vulnweb.com"
           accuknox_endpoint: ${{ secrets.ACCUKNOX_ENDPOINT }}
           accuknox_token: ${{ secrets.ACCUKNOX_TOKEN }}
           accuknox_label: ${{ secrets.ACCUKNOX_LABEL }}
           severity_threshold: "HIGH"
-          dast_scan_type: "baseline"
+          dast_scan_type: "full-scan"
